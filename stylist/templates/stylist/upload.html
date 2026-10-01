@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+
+{% block title %}
+Upload Clothing
+{% endblock %}
+
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+    .upload-page {
+        min-height: 100vh;
+        width: 100%;
+        background-image: url('https://github.com/JethvaBhavansi/learn/blob/main/upload_backgroun.png?raw=true');
+        background-size: cover;
+        background-position: left center;
+        background-repeat: no-repeat;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        font-family: 'Inter', sans-serif;
+        overflow: hidden;
+    }
+
+    .upload-content {
+        width: 45%;
+        max-width: 520px;
+        margin-right: 8%;
+        text-align: center;
+    }
+
+    .upload-heading {
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        line-height: 1.05;
+        color: #342416;
+        margin: 0;
+    }
+
+    .upload-heading span {
+        display: block;
+        color: #746a4c;
+        font-style: italic;
+    }
+
+    .upload-description {
+        color: #735d46;
+        font-size: 14px;
+        margin: 18px 0 22px;
+    }
+
+    .upload-card {
+        background: #f8f3e9;
+        border: 1px solid #d8cdb9;
+        border-radius: 22px;
+        padding: 28px 24px 24px;
+    }
+
+    .upload-card h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 25px;
+        color: #342416;
+        margin: 0 0 4px;
+    }
+
+    /* Django form label */
+    .upload-card form p {
+        margin: 0;
+    }
+
+    .upload-card form p label {
+        display: block;
+        color: #806b53;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    /* Hide original browser file button */
+    .upload-card input[type="file"] {
+        display: none;
+    }
+
+    /* Custom upload box */
+    .custom-upload {
+        width: 100%;
+        height: 180px;
+        border: 2px dashed #d2c5ad;
+        border-radius: 15px;
+        background: #fffdf8;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-sizing: border-box;
+        cursor: pointer;
+
+        transition: all 0.2s ease;
+    }
+
+    .custom-upload:hover {
+        border-color: #62583d;
+        background: #fbf8f0;
+    }
+
+    .upload-inside {
+        text-align: center;
+    }
+
+    .upload-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #62583d;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 0 auto 12px;
+    }
+
+    .upload-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: white;
+    }
+
+    .upload-title {
+        color: #342416;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .upload-subtitle {
+        color: #806b53;
+        font-size: 12px;
+    }
+
+    /* Preview */
+    #image-preview {
+        display: none;
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+
+        border: 2px dashed #d2c5ad;
+        border-radius: 15px;
+
+        background: #fffdf8;
+        padding: 8px;
+        box-sizing: border-box;
+
+        cursor: pointer;
+    }
+
+    #image-preview.show {
+        display: block;
+    }
+
+    .upload-card button[type="submit"] {
+        width: 100%;
+        margin-top: 16px;
+        padding: 14px;
+
+        border: none;
+        border-radius: 12px;
+
+        background: #62583d;
+        color: white;
+
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    .upload-card button[type="submit"]:hover {
+        background: #493f2a;
+    }
+
+    @media (max-width: 900px) {
+        .upload-page {
+            justify-content: center;
+        }
+
+        .upload-content {
+            width: 80%;
+            margin-right: 0;
+        }
+    }
+</style>
+
+
+<div class="upload-page">
+
+    <div class="upload-content">
+
+        <h2 class="upload-heading">
+            Find Your
+            <span>Style</span>
+        </h2>
+
+        <p class="upload-description">
+            Upload your clothing and discover your next look.
+        </p>
+
+
+        <div class="upload-card">
+
+            <h1>Upload Clothing</h1>
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <!-- Custom upload area -->
+                <div
+                    id="custom-upload"
+                    class="custom-upload"
+                >
+                    <div class="upload-inside">
+
+                        <div class="upload-icon">
+
+                            <svg
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 16V4m0 0L7 9m5-5l5 5M5 20h14"
+                                />
+                            </svg>
+
+                        </div>
+
+                        <div class="upload-title">
+                            Click to upload
+                        </div>
+
+                        <div class="upload-subtitle">
+                            PNG, JPG or JPEG
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Image preview -->
+                <img
+                    id="image-preview"
+                    src=""
+                    alt="Clothing preview"
+                >
+
+
+                <button type="submit">
+                    Create My Look &nbsp; →
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const fileInput = document.querySelector(
+        '.upload-card input[type="file"]'
+    );
+
+    const customUpload = document.getElementById(
+        'custom-upload'
+    );
+
+    const preview = document.getElementById(
+        'image-preview'
+    );
+
+
+    if (fileInput) {
+
+        /* Hide Django's original browser control */
+        fileInput.style.display = 'none';
+
+
+        /* Click custom upload box */
+        customUpload.addEventListener('click', function () {
+
+            fileInput.click();
+
+        });
+
+
+        /* When image is selected */
+        fileInput.addEventListener('change', function () {
+
+            const file = this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                return;
+            }
+
+
+            const reader = new FileReader();
+
+
+            reader.onload = function (event) {
+
+                preview.src = event.target.result;
+
+                preview.classList.add('show');
+
+                customUpload.style.display = 'none';
+
+            };
+
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+        /* Click preview to choose another image */
+        preview.addEventListener('click', function () {
+
+            fileInput.click();
+
+        });
+
+    }
+
+</script>
+
+{% endblock %}

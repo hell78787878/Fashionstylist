@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .fashion-font {
+        font-family: 'Playfair Display', serif;
+    }
+</style>
+
+
+<!-- FULL PAGE -->
+
+<div
+    class="h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
+    style="background-image: url('https://github.com/JethvaBhavansi/learn/blob/main/upload_backgroun.png?raw=true');"
+>
+
+
+    <!-- RIGHT SIDE CONTENT -->
+
+    <div class="ml-[50%] flex h-screen w-[50%] items-center justify-center">
+
+        <div class="w-full max-w-md px-8 text-center">
+
+
+            <!-- SMALL LABEL -->
+
+            <p class="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-[#62583d]">
+                AI Powered Fashion
+            </p>
+
+
+            <!-- MAIN TITLE -->
+
+            <h1 class="fashion-font text-5xl font-semibold leading-tight text-[#342416] sm:text-6xl">
+
+                Your Style.
+
+                <span class="block italic text-[#746a4c]">
+                    Reimagined.
+                </span>
+
+            </h1>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="mx-auto mt-5 max-w-sm text-sm leading-6 text-[#735d46]">
+
+                Upload your clothing and let AI create
+                stylish outfit ideas made just for you.
+
+            </p>
+
+
+            <!-- GET STARTED -->
+
+            <a
+                href="{% url 'stylist:upload' %}"
+                class="mt-7 inline-flex items-center gap-3 rounded-xl bg-[#62583d] px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-[#493f2a]"
+            >
+
+                Get Started
+
+                <span class="text-lg">
+                    →
+                </span>
+
+            </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

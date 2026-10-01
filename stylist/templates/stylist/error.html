@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+Error
+{% endblock %}
+
+{% block content %}
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .fashion-font {
+        font-family: 'Playfair Display', serif;
+    }
+</style>
+
+
+<!-- Main Page -->
+
+<div class="flex min-h-screen items-center justify-center bg-[#faf8f2] px-6">
+
+
+    <!-- Error Card -->
+
+    <div class="w-full max-w-lg text-center">
+
+
+        <!-- Small Label -->
+
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-[#62583d]">
+            AI Fashion Stylist
+        </p>
+
+
+        <!-- Heading -->
+
+        <h1 class="fashion-font text-5xl font-semibold leading-tight text-[#342416]">
+
+            Something went
+
+            <span class="block italic text-[#746a4c]">
+                wrong
+            </span>
+
+        </h1>
+
+
+        <!-- Error Box -->
+
+        <div class="mt-8 rounded-3xl border border-[#d8cdb9] bg-[#f8f3e9] p-8 shadow-xl">
+
+
+            <!-- Error Icon -->
+
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#62583d] text-white">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-7 w-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.8"
+                        d="M12 9v4m0 4h.01M10.3 3.6L2.9 17a2 2 0 001.75 3h14.7a2 2 0 001.75-3L13.7 3.6a2 2 0 00-3.4 0z"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <!-- Error Message -->
+
+            <p class="mx-auto mt-5 max-w-md text-sm leading-6 text-[#735d46]">
+                {{ error }}
+            </p>
+
+
+            <!-- Try Again -->
+
+            <a
+                href="{% url 'stylist:upload' %}"
+                class="mt-7 inline-flex items-center justify-center gap-3 rounded-xl bg-[#62583d] px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-[#493f2a]"
+            >
+
+                Try Again
+
+                <span class="text-lg">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- Small footer text -->
+
+        <p class="mt-6 text-xs text-[#81745b]">
+            Let's get your style back on track.
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

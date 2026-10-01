@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analysis
+{% endblock %}
+
+{% block content %}
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .fashion-font {
+        font-family: 'Playfair Display', serif;
+    }
+</style>
+
+
+<!-- Main Page -->
+
+<div class="min-h-screen bg-[#faf8f2] px-6 py-10">
+
+    <div class="mx-auto max-w-6xl">
+
+
+        <!-- Header -->
+
+        <div class="mb-8 text-center">
+
+            <p class="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#62583d]">
+                AI Fashion Stylist
+            </p>
+
+            <h1 class="fashion-font text-4xl font-semibold text-[#342416] sm:text-5xl">
+                Clothing Analysis
+            </h1>
+
+            <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#735d46]">
+                Here's what our AI detected from your clothing.
+            </p>
+
+        </div>
+
+
+        <!-- Main Content -->
+
+        <div class="grid gap-8 lg:grid-cols-[350px_1fr]">
+
+
+            <!-- Clothing Image -->
+
+            <div class="h-fit rounded-3xl border border-[#d8cdb9] bg-[#f8f3e9] p-6 shadow-lg">
+
+                <h2 class="fashion-font text-2xl font-semibold text-[#342416]">
+                    Your Clothing
+                </h2>
+
+                <p class="mt-1 text-xs text-[#806b53]">
+                    Uploaded clothing item
+                </p>
+
+
+                <div class="mt-5 rounded-2xl bg-[#fffdf8] p-3">
+
+                    <img
+                        src="{{ upload.original_image.url }}"
+                        class="h-80 w-full rounded-xl object-contain"
+                        alt="Uploaded clothing"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Analysis Details -->
+
+            <div>
+
+                <div class="mb-5">
+
+                    <h2 class="fashion-font text-3xl font-semibold text-[#342416]">
+                        AI Detected Details
+                    </h2>
+
+                    <p class="mt-1 text-sm text-[#806b53]">
+                        Key characteristics identified from your image.
+                    </p>
+
+                </div>
+
+
+                <!-- Details Grid -->
+
+                <div class="grid gap-4 sm:grid-cols-2">
+
+
+                    <!-- Category -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Category
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.category }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Primary Color -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Primary Color
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.dominant_color }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Subcategory -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Subcategory
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.subcategory }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Pattern -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Pattern
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.pattern }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Fit -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Fit
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.fit }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Neckline -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Neckline
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.neckline }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Sleeve -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Sleeve
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.sleeve_length }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Material -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Material
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.material }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Style -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Style
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.style }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Gender -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Gender
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.gender }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Confidence -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Confidence
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+                            {{ analysis.analysis_json.confidence }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Season -->
+
+                    <div class="rounded-2xl border border-[#d8cdb9] bg-[#f8f3e9] p-5 shadow-sm">
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-[#81745b]">
+                            Season
+                        </p>
+
+                        <p class="mt-2 font-semibold text-[#342416]">
+
+                            {% for season in analysis.analysis_json.season %}
+
+                                {{ season }}
+
+                                {% if not forloop.last %}
+                                    <span class="text-[#a0927d]">,</span>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,930 @@
+{% extends "base.html" %}
+
+{% block title %}
+Style Results
+{% endblock %}
+
+{% block content %}
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #faf8f2;
+        color: #342416;
+    }
+
+    .fashion-font {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .page-bg {
+        background: #faf8f2;
+    }
+
+    .main-card {
+        background: #f8f3e9;
+        border: 1px solid #d8cdb9;
+    }
+
+    .soft-bg {
+        background: #eee7d9;
+    }
+
+    .primary-btn {
+        background: #62583d;
+        color: white;
+        transition: all 0.2s ease;
+    }
+
+    .primary-btn:hover {
+        background: #493f2a;
+    }
+
+    .muted-text {
+        color: #735d46;
+    }
+
+    .light-text {
+        color: #806b53;
+    }
+
+    .label-text {
+        color: #81745b;
+    }
+
+    .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255,255,255,0.35);
+        border-top-color: white;
+        border-radius: 50%;
+        display: inline-block;
+        animation: spin 0.7s linear infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+</style>
+
+
+<div class="page-bg min-h-screen">
+
+    <!-- ============================================ -->
+    <!-- TOP BAR -->
+    <!-- ============================================ -->
+
+    <header class="border-b border-[#d8cdb9] bg-[#faf8f2]">
+
+        <div class="max-w-7xl mx-auto px-6 py-5">
+
+            <a
+                href="{% url 'stylist:upload' %}"
+                class="inline-flex items-center gap-2 text-sm font-medium text-[#62583d] hover:text-[#493f2a] transition"
+            >
+                ← New Upload
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================ -->
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+
+
+        <!-- ======================================== -->
+        <!-- UPLOADED ITEM + ANALYSIS -->
+        <!-- ======================================== -->
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+
+            <!-- Uploaded Clothing -->
+            <section class="main-card rounded-3xl p-6 shadow-lg">
+
+                <h1 class="fashion-font text-3xl font-semibold text-[#342416]">
+                    Your Clothing Item
+                </h1>
+
+                <p class="mt-2 text-sm light-text">
+                    Here's the item you uploaded for styling.
+                </p>
+
+                <div class="mt-6 rounded-2xl bg-white p-4">
+
+                    <img
+                        src="{{ upload.original_image.url }}"
+                        alt="Uploaded clothing"
+                        class="w-full max-h-[520px] object-contain rounded-xl"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- Style Analysis -->
+            <section class="main-card rounded-3xl p-6 shadow-lg">
+
+                <h2 class="fashion-font text-3xl font-semibold text-[#342416]">
+                    Style Analysis
+                </h2>
+
+                <p class="mt-2 text-sm light-text">
+                    Details identified from your clothing item.
+                </p>
+
+
+                {% with a=analysis.analysis_json %}
+
+                <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+
+                    <!-- Category -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Category
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ analysis.category }}
+                        </p>
+                    </div>
+
+
+                    <!-- Dominant Color -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Dominant Color
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ analysis.dominant_color }}
+                        </p>
+                    </div>
+
+
+                    <!-- Subcategory -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Subcategory
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ a.subcategory }}
+                        </p>
+                    </div>
+
+
+                    <!-- Pattern -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Pattern
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ a.pattern }}
+                        </p>
+                    </div>
+
+
+                    <!-- Fit -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Fit
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ a.fit }}
+                        </p>
+                    </div>
+
+
+                    <!-- Material -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Material
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ a.material }}
+                        </p>
+                    </div>
+
+
+                    <!-- Style -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Style
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ a.style }}
+                        </p>
+                    </div>
+
+
+                    <!-- Gender -->
+                    <div>
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Gender
+                        </p>
+
+                        <p class="mt-1 font-medium text-[#342416]">
+                            {{ a.gender }}
+                        </p>
+                    </div>
+
+                </div>
+
+                {% endwith %}
+
+
+                <!-- Extra Analysis Details -->
+
+                <div class="mt-8 rounded-2xl soft-bg p-5">
+
+                    <h3 class="fashion-font text-xl font-semibold text-[#342416]">
+                        Styling Details
+                    </h3>
+
+                    <div class="mt-4 space-y-3">
+
+
+                        {% if analysis.analysis_json.neckline %}
+                        <div class="flex justify-between gap-4 text-sm">
+                            <span class="label-text">
+                                Neckline
+                            </span>
+
+                            <span class="font-medium text-[#342416] text-right">
+                                {{ analysis.analysis_json.neckline }}
+                            </span>
+                        </div>
+                        {% endif %}
+
+
+                        {% if analysis.analysis_json.sleeve_length %}
+                        <div class="flex justify-between gap-4 text-sm">
+                            <span class="label-text">
+                                Sleeve Length
+                            </span>
+
+                            <span class="font-medium text-[#342416] text-right">
+                                {{ analysis.analysis_json.sleeve_length }}
+                            </span>
+                        </div>
+                        {% endif %}
+
+
+                        {% if analysis.analysis_json.confidence %}
+                        <div class="flex justify-between gap-4 text-sm">
+                            <span class="label-text">
+                                Confidence
+                            </span>
+
+                            <span class="font-medium text-[#342416] text-right">
+                                {{ analysis.analysis_json.confidence }}
+                            </span>
+                        </div>
+                        {% endif %}
+
+
+                        {% if analysis.analysis_json.season %}
+                        <div class="pt-2">
+
+                            <p class="text-xs uppercase tracking-wider label-text">
+                                Suitable Season
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mt-2">
+
+                                {% for season in analysis.analysis_json.season %}
+
+                                <span class="rounded-full bg-[#faf8f2] border border-[#d8cdb9] px-3 py-1 text-xs text-[#735d46]">
+                                    {{ season }}
+                                </span>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- ======================================== -->
+        <!-- OUTFIT RECOMMENDATIONS -->
+        <!-- ======================================== -->
+
+        <section class="mt-10">
+
+            <div class="mb-6">
+
+                <h2 class="fashion-font text-4xl font-semibold text-[#342416]">
+                    Outfit Recommendations
+                </h2>
+
+                <p class="mt-2 text-sm light-text">
+                    Choose a look and generate an AI visual for it.
+                </p>
+
+            </div>
+
+
+            <!-- 2 CARDS PER ROW -->
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                {% for outfit in style_session.recommendation_json.outfits %}
+
+
+                <article class="main-card rounded-3xl p-6 shadow-lg">
+
+
+                    <!-- Outfit Number -->
+
+                    <div class="flex items-start justify-between gap-4">
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-widest label-text">
+                                Look {{ forloop.counter }}
+                            </p>
+
+                            <h3 class="fashion-font mt-1 text-2xl font-semibold text-[#342416]">
+                                {{ outfit.theme }}
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Outfit Details -->
+
+                    <div class="mt-6 space-y-4">
+
+
+                        <!-- Bottom -->
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-wider label-text">
+                                Bottom
+                            </p>
+
+                            <p class="mt-1 text-sm muted-text">
+                                {{ outfit.bottom }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- Footwear -->
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-wider label-text">
+                                Footwear
+                            </p>
+
+                            <p class="mt-1 text-sm muted-text">
+                                {{ outfit.footwear }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- Bag -->
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-wider label-text">
+                                Bag
+                            </p>
+
+                            <p class="mt-1 text-sm muted-text">
+                                {{ outfit.bag }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- Accessories -->
+
+                        {% if outfit.accessories %}
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-wider label-text">
+                                Accessories
+                            </p>
+
+                            <div class="mt-2 flex flex-wrap gap-2">
+
+                                {% for item in outfit.accessories %}
+
+                                <span class="rounded-full bg-[#eee7d9] px-3 py-1 text-xs text-[#735d46]">
+                                    {{ item }}
+                                </span>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+                        <!-- Jewelry -->
+
+                        {% if outfit.jewelry %}
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-wider label-text">
+                                Jewelry
+                            </p>
+
+                            <div class="mt-2 flex flex-wrap gap-2">
+
+                                {% for item in outfit.jewelry %}
+
+                                <span class="rounded-full bg-[#eee7d9] px-3 py-1 text-xs text-[#735d46]">
+                                    {{ item }}
+                                </span>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <!-- Reason -->
+
+                    <div class="mt-6 rounded-2xl bg-[#eee7d9] p-5">
+
+                        <p class="text-xs uppercase tracking-wider label-text">
+                            Why This Works
+                        </p>
+
+                        <p class="mt-2 text-sm leading-relaxed muted-text">
+                            {{ outfit.reason }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Generate Button -->
+
+                    <form
+                        method="POST"
+                        action="{% url 'stylist:generate_image' upload.uuid %}"
+                        onSubmit="showLoading(this)"
+                        class="mt-6"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="outfit_index"
+                            value="{{ forloop.counter0 }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="primary-btn w-full rounded-xl px-5 py-3.5 text-sm font-semibold"
+                        >
+
+                            <span class="btn-label">
+                                Generate This Look →
+                            </span>
+
+                            <span class="btn-spinner hidden">
+                                <span class="spinner"></span>
+                                Generating…
+                            </span>
+
+                        </button>
+
+                    </form>
+
+
+                </article>
+
+
+                {% endfor %}
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================== -->
+        <!-- QUICK GENERATE - BOTTOM -->
+        <!-- ======================================== -->
+
+        <section class="mt-12">
+
+
+            <div class="main-card rounded-3xl p-7 shadow-lg">
+
+
+                <div>
+
+                    <p class="text-xs uppercase tracking-widest label-text">
+                        Create Another Look
+                    </p>
+
+                    <h2 class="fashion-font mt-1 text-4xl font-semibold text-[#342416]">
+                        Quick Generate
+                    </h2>
+
+                    <p class="mt-2 text-sm light-text">
+                        Generate a new outfit or describe exactly what you want.
+                    </p>
+
+                </div>
+
+
+                <div class="mt-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                    <!-- Surprise Me -->
+
+                    <div class="rounded-2xl soft-bg p-6">
+
+                        <div class="text-2xl">
+                            🎲
+                        </div>
+
+                        <h3 class="fashion-font mt-3 text-2xl font-semibold text-[#342416]">
+                            Surprise Me
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-relaxed muted-text">
+                            Let AI create a completely new outfit based on your uploaded clothing.
+                        </p>
+
+
+                        <form
+                            method="POST"
+                            action="{% url 'stylist:generate_image' upload.uuid %}"
+                            onSubmit="showLoading(this)"
+                            class="mt-5"
+                        >
+
+                            {% csrf_token %}
+
+                            <input
+                                type="hidden"
+                                name="random_style"
+                                value="true"
+                            >
+
+                            <button
+                                type="submit"
+                                class="primary-btn w-full rounded-xl px-5 py-3.5 text-sm font-semibold"
+                            >
+
+                                <span class="btn-label">
+                                    🎲 Surprise Me
+                                </span>
+
+                                <span class="btn-spinner hidden">
+                                    <span class="spinner"></span>
+                                    Generating…
+                                </span>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <!-- Custom Style -->
+
+                    <div class="rounded-2xl soft-bg p-6">
+
+                        <div class="text-2xl">
+                            ✨
+                        </div>
+
+                        <h3 class="fashion-font mt-3 text-2xl font-semibold text-[#342416]">
+                            Custom Style
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-relaxed muted-text">
+                            Tell AI what kind of outfit you want to create.
+                        </p>
+
+
+                        <form
+                            method="POST"
+                            action="{% url 'stylist:generate_image' upload.uuid %}"
+                            onSubmit="showLoading(this)"
+                            class="mt-5"
+                        >
+
+                            {% csrf_token %}
+
+                            <textarea
+                                name="custom_prompt"
+                                rows="4"
+                                placeholder="Example: Create a smart casual outfit for a dinner..."
+                                class="w-full resize-none rounded-xl border border-[#d8cdb9] bg-[#faf8f2] px-4 py-3 text-sm text-[#342416] placeholder-[#a09582] outline-none focus:border-[#746a4c]"
+                            ></textarea>
+
+
+                            <button
+                                type="submit"
+                                class="primary-btn mt-3 w-full rounded-xl px-5 py-3.5 text-sm font-semibold"
+                            >
+
+                                <span class="btn-label">
+                                    ✨ Generate Custom Style
+                                </span>
+
+                                <span class="btn-spinner hidden">
+                                    <span class="spinner"></span>
+                                    Generating…
+                                </span>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+<!-- ======================================== -->
+<!-- GENERATED LOOKS - VERY BOTTOM -->
+<!-- ======================================== -->
+
+<section id="generated-looks" class="mt-12 pb-16">
+
+    <div class="mb-7">
+
+       
+        <h2 class="fashion-font mt-1 text-4xl font-semibold text-[#342416]">
+            Generated Looks
+        </h2>
+
+        <p class="mt-2 text-sm light-text">
+            Your AI-generated outfit visuals will appear here.
+        </p>
+
+    </div>
+
+
+    {% if generated_images %}
+
+        {% for image in generated_images %}
+
+        <article class="main-card rounded-3xl shadow-lg overflow-hidden mb-8">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+
+                <!-- LEFT: GENERATED IMAGE -->
+
+                <div class="bg-white p-5">
+
+                    <img
+                        src="{{ image.generated_image.url }}"
+                        alt="Generated outfit {{ image.option_number }}"
+                        class="w-full rounded-2xl object-contain"
+                    >
+
+                </div>
+
+
+                <!-- RIGHT: INSPIRING TEXT -->
+
+                <div class="flex items-center justify-center p-10 lg:p-16">
+
+                    <div class="max-w-md">
+
+                        <p class="text-xs uppercase tracking-[0.2em] text-[#81745b]">
+                            
+                        </p>
+
+                        <h3 class="fashion-font mt-4 text-5xl lg:text-6xl font-semibold leading-tight text-[#342416]">
+                            STEP INTO
+                            <br>
+                            <span class="italic text-[#746a4c]">
+                                YOUR STYLE.
+                            </span>
+                        </h3>
+
+                        <div class="mt-6 h-px w-16 bg-[#746a4c]"></div>
+
+                        <p class="mt-6 text-base leading-7 text-[#735d46]">
+                            Wear it with confidence.
+                            <br>
+                            Make it yours.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOOK NUMBER -->
+
+            <div class="border-t border-[#d8cdb9] px-6 py-5">
+
+                <p class="text-xs uppercase tracking-widest text-[#81745b]">
+                    Generated Look
+                </p>
+
+                <h4 class="fashion-font mt-1 text-2xl font-semibold text-[#342416]">
+                    Look {{ image.option_number }}
+                </h4>
+
+                {% if image.prompt %}
+
+                <p class="mt-2 text-sm leading-relaxed text-[#806b53]">
+                    {{ image.prompt }}
+                </p>
+
+                {% endif %}
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+
+    {% else %}
+
+        <div class="main-card rounded-3xl border-dashed p-12 text-center">
+
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#eee7d9] text-2xl">
+                ✨
+            </div>
+
+            <h3 class="fashion-font mt-5 text-2xl font-semibold text-[#342416]">
+                No Looks Generated Yet
+            </h3>
+
+            <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed light-text">
+                Choose one of the outfit recommendations above or use Quick Generate
+                to create your first AI-generated look.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ============================================ -->
+<!-- LOADING SCRIPT -->
+<!-- ============================================ -->
+
+<script>
+
+function showLoading(form) {
+
+    const btn = form.querySelector('button[type="submit"]');
+
+    if (!btn) {
+        return;
+    }
+
+    btn.disabled = true;
+
+    const label = btn.querySelector('.btn-label');
+    const spinner = btn.querySelector('.btn-spinner');
+
+    if (label) {
+        label.classList.add('hidden');
+    }
+
+    if (spinner) {
+        spinner.classList.remove('hidden');
+        spinner.classList.add('inline-flex');
+        spinner.style.alignItems = 'center';
+        spinner.style.justifyContent = 'center';
+    }
+
+}
+
+</script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const generatedLooks = document.getElementById("generated-looks");
+
+    if (!generatedLooks) {
+        return;
+    }
+
+    const generatedImages = generatedLooks.querySelectorAll("img");
+
+    if (generatedImages.length > 0) {
+
+        // Get the LAST generated image
+        const lastImage = generatedImages[generatedImages.length - 1];
+
+        // Wait for the image to load completely
+        if (lastImage.complete) {
+
+            setTimeout(function () {
+
+                lastImage.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }, 500);
+
+        } else {
+
+            lastImage.addEventListener("load", function () {
+
+                setTimeout(function () {
+
+                    lastImage.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                }, 300);
+
+            });
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

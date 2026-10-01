@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/gajjarkav/Documents/fashoin-imagegeneration-django-main/stylist/views.py", line 247, in generate_image
+    response = workflow.run_refinement(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'WorkflowService' object has no attribute 'run_refinement'
