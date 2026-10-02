@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "rt9mj0j44gigmgrt484trrgrtbttrt7rett4")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["fashionstylist-4554.onrender.com"]
 
 IMAGE_PROVIDER = os.getenv("IMAGE_PROVIDER")
 
